@@ -62,7 +62,3 @@ BlazeFace returns a bounding box and 6 facial landmarks per frame. Head pose is 
 React 18, TensorFlow.js, BlazeFace, Recharts, Lucide React, Web Audio API, Chrome Manifest V3 (declarativeNetRequest), localStorage
 
 ---
-
-## License
-
-MIT
