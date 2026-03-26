@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Blocked — FocusLens</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #06060e, #0c0c1a, #0a0f18);
+      color: #e0e6f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+    }
+    .container { max-width: 460px; padding: 48px 32px; }
+    .shield {
+      width: 80px; height: 80px; margin: 0 auto 24px;
+      border-radius: 20px;
+      background: rgba(255,61,90,0.1);
+      border: 2px solid rgba(255,61,90,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    h1 {
+      font-size: 28px; font-weight: 800; margin-bottom: 8px;
+      background: linear-gradient(90deg, #ff3d5a, #ff6b7f);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .site-name {
+      font-size: 14px; color: #ff6b7f; margin-bottom: 20px;
+      font-family: monospace;
+      background: rgba(255,61,90,0.08);
+      display: inline-block; padding: 4px 14px; border-radius: 6px;
+    }
+    p { font-size: 15px; color: #8a94a6; line-height: 1.6; margin-bottom: 24px; }
+    .tip {
+      font-size: 12px; color: #4a5568; margin-bottom: 28px;
+      padding: 10px 14px; background: rgba(255,255,255,0.02);
+      border-radius: 8px; border: 1px solid rgba(255,255,255,0.04);
+    }
+    .back-btn {
+      padding: 12px 32px; border-radius: 8px;
+      background: rgba(0,255,200,0.1); border: 1px solid rgba(0,255,200,0.2);
+      color: #00ffc8; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-right: 8px;
+    }
+    .back-btn:hover { background: rgba(0,255,200,0.2); transform: translateY(-1px); }
+    .quote {
+      font-style: italic; color: #4a5568; font-size: 13px;
+      border-left: 2px solid #00ffc840; padding-left: 14px;
+      text-align: left; margin-top: 32px;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="shield">🛡️</div>
+    <h1>Site Blocked</h1>
+    <div id="siteName" class="site-name"></div>
+    <p>
+      FocusLens is in <strong>whitelist mode</strong> — only sites you've explicitly
+      allowed can be accessed during your focus session.
+    </p>
+    <div class="tip">
+      To allow this site, open the FocusLens extension and add it to your allowed list.
+      Or stop your focus session to unblock everything.
+    </div>
+    <button class="back-btn" onclick="history.back()">← Go Back</button>
+    <div class="quote" id="quote"></div>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const site = params.get("site");
+    document.getElementById("siteName").textContent = site || "this site";
+    const quotes = [
+      "The secret of getting ahead is getting started. — Mark Twain",
+      "Focus is a matter of deciding what things you're not going to do. — John Carmack",
+      "Discipline is choosing between what you want now and what you want most.",
+      "You don't have to be extreme, just consistent.",
+      "Small disciplines repeated with consistency every day lead to great achievements. — John C. Maxwell",
+    ];
+    document.getElementById("quote").textContent =
+      quotes[Math.floor(Math.random() * quotes.length)];
+  </script>
+</body>
+</html>

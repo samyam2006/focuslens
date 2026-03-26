@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      background: #0c0c1a;
+      color: #e0e6f0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      padding: 16px;
+    }
+    .header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .logo {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: linear-gradient(135deg, #00ffc8, #0088ff);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: #06060e;
+    }
+    h1 { font-size: 15px; font-weight: 700; }
+    .subtitle { font-size: 10px; color: #4a5568; }
+
+    .status {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; border-radius: 8px;
+      margin-bottom: 12px; font-size: 12px; font-weight: 600;
+    }
+    .status--active { background: rgba(0,255,200,0.08); color: #00ffc8; }
+    .status--inactive { background: rgba(255,255,255,0.04); color: #4a5568; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot--on { background: #00ffc8; box-shadow: 0 0 6px #00ffc880; }
+    .dot--off { background: #4a5568; }
+
+    .mode-info {
+      font-size: 10px; color: #ff6b7f; margin-bottom: 10px;
+      padding: 6px 10px; background: rgba(255,61,90,0.06);
+      border: 1px solid rgba(255,61,90,0.12); border-radius: 6px;
+      line-height: 1.4;
+    }
+    .mode-info strong { color: #ff3d5a; }
+
+    .toggle-btn {
+      width: 100%; padding: 10px; border: none; border-radius: 8px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      margin-bottom: 12px; transition: all 0.2s;
+    }
+    .toggle-btn--start { background: #00ffc8; color: #06060e; }
+    .toggle-btn--stop { background: #ff3d5a; color: #fff; }
+
+    .section-label {
+      font-size: 10px; color: #4a5568; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+
+    .site-list { max-height: 160px; overflow-y: auto; margin-bottom: 10px; }
+    .site-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 8px; font-size: 11px; color: #00ffc8;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .remove-btn {
+      background: none; border: none; color: #ff3d5a;
+      cursor: pointer; font-size: 14px; padding: 2px 6px;
+    }
+
+    .add-row { display: flex; gap: 6px; }
+    .add-input {
+      flex: 1; padding: 7px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+      color: #e0e6f0; font-size: 11px; outline: none;
+    }
+    .add-input::placeholder { color: #3a3a50; }
+    .add-input:focus { border-color: #00ffc8; }
+    .add-btn {
+      padding: 7px 12px; border-radius: 6px;
+      background: #00ffc820; border: 1px solid #00ffc840;
+      color: #00ffc8; cursor: pointer; font-size: 12px;
+    }
+
+    .empty { font-size: 11px; color: #3a3a50; text-align: center; padding: 12px; }
+    .error { font-size: 10px; color: #ff3d5a; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">F</div>
+    <div>
+      <h1>FocusLens</h1>
+      <div class="subtitle">Site Blocker</div>
+    </div>
+  </div>
+
+  <div id="status" class="status status--inactive">
+    <div id="dot" class="dot dot--off"></div>
+    <span id="statusText">Loading…</span>
+  </div>
+
+  <div class="mode-info">
+    <strong>Whitelist Mode:</strong> When active, ALL websites are blocked except the ones below.
+  </div>
+
+  <button id="toggleBtn" class="toggle-btn toggle-btn--start">
+    Start Focus Session
+  </button>
+
+  <div class="section-label">✅ Allowed Sites (everything else blocked)</div>
+  <div id="siteList" class="site-list">
+    <div class="empty">Loading…</div>
+  </div>
+
+  <div class="add-row">
+    <input id="newSite" class="add-input" type="text" placeholder="e.g. docs.google.com" />
+    <button id="addBtn" class="add-btn">Allow</button>
+  </div>
+
+  <div id="errorMsg" class="error" style="display:none"></div>
+
+  <!-- MV3 requires external scripts, no inline handlers -->
+  <script src="popup.js"></script>
+</body>
+</html>
